@@ -1,0 +1,27 @@
+{
+  "name": "FlexyTrello",
+  "description": "Make Trello Lists Resizable",
+  "version": "1.1",
+  "background": {
+    "scripts": ["./background.js"],
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-1.7.1.min.js",
+        "FlexyTrello.js"
+      ],
+      "matches": ["https://trello.com/*"]
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "https://trello.com/*"
+  ],
+  "page_action": {
+    "default_icon": "resize.png",
+    "default_title": "FlexyTrello"
+  },
+  "manifest_version": 2
+}
