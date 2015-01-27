@@ -1,7 +1,7 @@
 var flexyfn = function() {
 
     //Add a display-none button on each list
-    $(".list-header").append("<a href='#' class='x-btn-hide icon-sm icon-close' style='float:right' onclick='close(this)'></a>");
+    $(".list-header").prepend("<a href='#' class='x-btn-hide icon-sm icon-close' style='float:right' onclick='close(this)'></a>");
     $(".x-btn-hide").on("click", function (elem) {
         $(elem.currentTarget).parent().parent().hide();
     });
