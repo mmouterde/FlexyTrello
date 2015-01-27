@@ -1,7 +1,7 @@
 {
   "name": "FlexyTrello",
   "description": "Make Trello Lists Resizable",
-  "version": "1.1",
+  "version": "1.1.1",
   "icons": { "16": "resize16.png","48": "resize48.png","128": "resize128.png"},
   "author":"Martin Mouterde",
   "background": {
