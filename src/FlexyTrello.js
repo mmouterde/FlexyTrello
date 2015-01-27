@@ -14,7 +14,8 @@ var flexyfn = function() {
     //Make list resizable
     var list = $(".list");
     list.css("resize", "horizontal");
-    list.css("overflow", "auto");
+    list.css("overflow-x", "hidden");
+    $(".open-card-composer").css("margin-right","20");
     //make list as flex (override 0 0 260px)
     list.css("flex", "0 0 auto");
     //make cards list as a wrapping rows
