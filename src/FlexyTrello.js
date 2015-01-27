@@ -59,6 +59,7 @@ var flexyfn = function() {
         //Unwrap
         list.unwrap();
         //Transform to make like expanded
+        list.css("transform-origin","0 0");
         list.css("transform","translateY(0) rotate(0deg)");
     });
 
