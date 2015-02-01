@@ -1,10 +1,19 @@
 var flexyfn = function() {
 
+    var cssPxToInt = function (cssValue){
+        if(cssValue)
+            return parseInt(cssValue.substr(0,cssValue.indexOf("p")))
+        else
+            return 0;
+    }
+
     var headers =  $(".list-header");
     var list = $(".list");
 
     //All list have the same width. save computed width that fit screen
     var listWidth_bk = list.css("width");
+    var headerWidth_bk = headers.css("width");
+    var listReducedWidth = cssPxToInt(headers.css("height"))+cssPxToInt(headers.css("padding-top"))+cssPxToInt(headers.css("padding-bottom"))+cssPxToInt(list.css("padding-top"))+cssPxToInt(list.css("padding-bottom"));
 
     //Add a collapse button
     headers.prepend("<a href='#' class='x-btn-collapse icon-sm' style='float:right'>-</a>");
@@ -17,50 +26,60 @@ var flexyfn = function() {
     $(".x-btn-collapse").on("click", function (elem) {
         //Get the list element
         var list = $(elem.currentTarget).parent().parent();
-        //Remove the resize grabber
+
+        //Backup dimensions
+        list.data("height_bk",list.css("height"));
+
+        //Remove the resize grabber & scrollbar
         list.css("resize", "none");
-        //Backup the width
-        list.data("width_bk",list.css("width"));
-        //Apply the original width (all collapsed list will have the same size)
-        list.css("width",listWidth_bk);
-        //hide list content (except header)
+        list.css("overflow", "visible");
+
+        //Toggle expand/collapse buttons
+        list.find(".x-btn-expand").show();
+        list.find(".x-btn-collapse").hide();
+
+        //hide list content (except header) & trello list context menu
         list.find(".list-cards").hide();
         list.find(".open-card-composer").hide();
-        //Hide collapse button
-        list.find(".x-btn-collapse").hide();
-        //Show expand button
-        list.find(".x-btn-expand").show();
-        //hide trello list context menu
         list.find(".list-header-menu-icon").hide();
-        //Wrap in containter that has a limited width (which match the height before transform)
-        list.wrap( "<div style='flex-shrink:0;width:"+list.css("height")+";padding-left:5px;padding-right: 15px;'></div>" );
-        //Transform to make like collapsed
-        list.css("transform","translateY("+listWidth_bk+") rotate(-90deg)");
 
+        //Transform to make like collapsed
+        var header = list.find(".list-header");
+        header.css("transform","translateY("+(cssPxToInt(listWidth_bk)-cssPxToInt(header.css("padding-left")))+"px) rotate(-90deg)");
+        header.data("width_bk",header.css("width"));
+        header.css("width",headerWidth_bk);
+
+        list.css("max-width",listReducedWidth);
+        list.css("height",listWidth_bk);
     });
 
     //Expand button click handler
     $(".x-btn-expand").on("click", function (elem) {
         //Get the list element
         var list = $(elem.currentTarget).parent().parent();
-        //Apply the resize grabber
+
+        //restore the resize grabber & scrollbar
         list.css("resize", "horizontal");
-        // restore saved custom width
-        list.css("width",list.data("width_bk"));
-        //show list content
+        list.css("overflow", "");
+        list.css("overflow-x", "hidden");
+
+        //Toggle expand/collapse buttons
+        list.find(".x-btn-expand").hide();
+        list.find(".x-btn-collapse").show();
+
+        //show list content (except header) & trello list context menu
         list.find(".list-cards").show();
         list.find(".open-card-composer").show();
-        //show collapse button
-        list.find(".x-btn-collapse").show();
-        //hide collapse button
-        list.find(".x-btn-expand").hide();
-        //show trello list context menu
         list.find(".list-header-menu-icon").show();
-        //Unwrap
-        list.unwrap();
-        //Transform to make like expanded
-        list.css("transform-origin","0 0");
-        list.css("transform","translateY(0) rotate(0deg)");
+
+        //Transform to make like collapsed
+        var header = list.find(".list-header");
+        header.css("transform","");
+        header.css("width","");
+
+        //restore dimensions
+        list.css("max-width","");
+        list.css("height",list.data("height_bk"));
     });
 
     //Make add list trello button shrinkable
