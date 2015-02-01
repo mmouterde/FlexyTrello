@@ -27,9 +27,6 @@ var flexyfn = function() {
         //Get the list element
         var list = $(elem.currentTarget).parent().parent();
 
-        //Backup dimensions
-        list.data("height_bk",list.css("height"));
-
         //Remove the resize grabber & scrollbar
         list.css("resize", "none");
         list.css("overflow", "visible");
@@ -46,7 +43,6 @@ var flexyfn = function() {
         //Transform to make like collapsed
         var header = list.find(".list-header");
         header.css("transform","translateY("+(cssPxToInt(listWidth_bk)-cssPxToInt(header.css("padding-left")))+"px) rotate(-90deg)");
-        header.data("width_bk",header.css("width"));
         header.css("width",headerWidth_bk);
 
         list.css("max-width",listReducedWidth);
@@ -79,7 +75,7 @@ var flexyfn = function() {
 
         //restore dimensions
         list.css("max-width","");
-        list.css("height",list.data("height_bk"));
+        list.css("height","");
     });
 
     //Make add list trello button shrinkable
