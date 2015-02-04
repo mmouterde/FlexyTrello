@@ -36,9 +36,9 @@ var flexyfn = function() {
         list.find(".x-btn-collapse").hide();
 
         //hide list content (except header) & trello list context menu
-        list.find(".list-cards").hide();
-        list.find(".open-card-composer").hide();
-        list.find(".list-header-menu-icon").hide();
+        var toHide = list.find(":not(.list-header-name, .list-header, .x-btn-expand,:hidden)");
+        toHide.addClass("x-hidden");
+        toHide.hide();
 
         //Transform to make like collapsed
         var header = list.find(".list-header");
@@ -64,9 +64,7 @@ var flexyfn = function() {
         list.find(".x-btn-collapse").show();
 
         //show list content (except header) & trello list context menu
-        list.find(".list-cards").show();
-        list.find(".open-card-composer").show();
-        list.find(".list-header-menu-icon").show();
+        list.find(".x-hidden").show();
 
         //Transform to make like collapsed
         var header = list.find(".list-header");
