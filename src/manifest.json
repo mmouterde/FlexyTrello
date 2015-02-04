@@ -17,6 +17,9 @@
       "matches": ["https://trello.com/*"]
     }
   ],
+  "web_accessible_resources": [
+    "*.css"
+  ],
   "permissions": [
     "tabs",
     "https://trello.com/*"

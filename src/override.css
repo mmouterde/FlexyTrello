@@ -1,0 +1,63 @@
+
+.x-btn-expand {
+    display :none;
+}
+
+.list.x-collapsed .x-btn-expand {
+    display: block;
+}
+
+.x-btn-collapse, .x-btn-expand {
+    float:right;
+}
+
+.list.x-collapsed .x-btn-collapse {
+    display: none;
+}
+
+.list.x-collapsed .list-header{
+    transform: translateY({{headerTranslate}}px) rotate(-90deg);
+    width:{{headerWidth}};
+}
+
+.list.x-collapsed {
+    max-width:{{listReducedWidth}}px;
+    height:{{listWidth}};
+}
+
+
+.list.x-collapsed{
+    resize: none;
+    overflow:visible;
+}
+
+
+.add-list {
+    flex-shrink: 1;
+}
+
+
+.list {
+    resize: horizontal;
+    overflow-x: hidden;
+    flex: 0 0 auto;
+}
+
+
+.list-cards {
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.list-card {
+    margin: 3px;
+    width:{{listCardWidth}};
+}
+
+.open-card-composer {
+    margin-right: 20px;
+}
+
+.list.x-collapsed *:not(.list-header-name):not(.list-header):not(.x-btn-expand){
+    display: none;
+}

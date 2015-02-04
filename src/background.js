@@ -4,7 +4,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     else
         chrome.pageAction.hide(tab.id);
 });
-
+/*
 chrome.pageAction.onClicked.addListener(function (tab) {
     chrome.tabs.executeScript(tab.id, {
         code: 'flexyfn();'
@@ -12,3 +12,4 @@ chrome.pageAction.onClicked.addListener(function (tab) {
         chrome.pageAction.hide(tab.id);
     });
 });
+*/
