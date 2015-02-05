@@ -19,7 +19,7 @@ $(function () {
         headerWidth: headers.css("width")
     };
 
-    $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/override.css", callback);
+    $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/override.css", callback);
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
         addUI();
