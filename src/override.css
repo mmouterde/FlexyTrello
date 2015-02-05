@@ -16,6 +16,7 @@
 }
 
 .list.x-collapsed .list-header{
+    transform-origin: 0 0;
     transform: translateY({{headerTranslate}}px) rotate(-90deg);
     width:{{headerWidth}};
 }
