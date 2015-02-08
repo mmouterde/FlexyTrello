@@ -7,4 +7,6 @@ Make Trello Lists more flexible :
 - Collapse/Expand lists
 
 See short demo https://www.youtube.com/watch?v=qt2n690BOCQ
-See in Chrome WebStore : https://chrome.google.com/webstore/detail/pggiemacedhgohmpcgdpceckeicjlgfn
+
+- Available on Chrome WebStore : https://chrome.google.com/webstore/detail/pggiemacedhgohmpcgdpceckeicjlgfn
+- Available on  on addons.mozilla : https://addons.mozilla.org/fr/firefox/addon/flexytrello/
