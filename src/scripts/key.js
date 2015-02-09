@@ -1,0 +1,2 @@
+// key.js
+var APP_KEY = '16127658873ef8a4da20289641b411ad';

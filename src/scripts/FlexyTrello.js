@@ -1,4 +1,6 @@
-$(function () {
+$(".list-card:first").waitUntilExists(initFlexyTrello,true);
+
+function initFlexyTrello() {
 
     var headers = $(".list-header");
     var headerPaddingTop = cssPxToInt(headers.css("padding-top"));
@@ -19,10 +21,14 @@ $(function () {
         headerWidth: headers.css("width")
     };
 
-    $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/override.css", callback);
+    //PROD $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
+    //DEV 
+    $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
+
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
         addUI();
+        restoreState();
     }
 
     function addUI() {
@@ -62,4 +68,24 @@ $(function () {
         }
         return result;
     }
-});
+
+    function restoreState() {
+        chrome.extension.sendMessage({
+            command: 'getBoardId',
+            id: findFirstCardId()
+        }, function (data) {
+            if (data.idBoard !== undefined) {
+                chrome.extension.sendMessage({
+                    command: 'getBoardDetail',
+                    id: data.idBoard
+                }, function (data) {
+                    console.log(data.lists);
+                });
+            }
+        });
+    }
+
+    function findFirstCardId() {
+        return $('a.list-card-title:first').attr('href').split('/')[2];
+    }
+}

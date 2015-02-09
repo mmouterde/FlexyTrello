@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>FlexyTrello Settings</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<h1><img src="../img/resize.png" style="vertical-align:bottom;">FlexyTrello Settings</h1>
+
+<div id="trello_helper_loggedout" style="display: none">
+    <p>To enable persistence, you have to <a href="#" id="trello_helper_login">authorize</a> FlexyTrello to use your Trello account.</p>
+</div>
+<div id="trello_helper_loggedin" style="display: none">
+    <p> <a href="#" class="medium success button" id="trello_helper_logout">Disable FlexyTrello to use your Trello account</a></p>
+</div>
+
+<script src="../scripts/key.js"></script>
+<script src="../lib/jquery-1.7.1.min.js"></script>
+<script src="js/settings.js"></script>
+<script src="../lib/HashSearch.js"></script>
+<script src="../lib/trello_client.js"></script>
+</body>
+</html>
