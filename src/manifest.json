@@ -15,8 +15,9 @@
     "content_scripts": [
         {
             "js": [
-                "lib/jquery-1.7.1.min.js",
+                "lib/jquery-1.11.2.js",
                 "lib/jquery.waituntilexists.js",
+                "lib/jquery.ba-resize.js",
                 "scripts/FlexyTrello.js"
             ],
             "matches": ["https://trello.com/b*"]

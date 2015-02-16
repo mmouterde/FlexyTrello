@@ -1,4 +1,4 @@
-$(".list-card:first").waitUntilExists(initFlexyTrello,true);
+$(".list-card:first").waitUntilExists(initFlexyTrello, true);
 
 function initFlexyTrello() {
 
@@ -28,7 +28,7 @@ function initFlexyTrello() {
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
         addUI();
-        restoreState();
+        getPreviousState();
     }
 
     function addUI() {
@@ -39,13 +39,37 @@ function initFlexyTrello() {
 
         //Collapse Button click handler
         $(".x-btn-collapse").on("click", function (elem) {
-            $(elem.currentTarget).parent().parent().addClass("x-collapsed");
+            var listElement = $(elem.currentTarget).parent().parent();
+            collapse(listElement);
+            localStorage.setItem('list_state_' + listElement.attr("id"), "true");
         });
 
         //Expand button click handler
         $(".x-btn-expand").on("click", function (elem) {
-            $(elem.currentTarget).parent().parent().removeClass("x-collapsed");
+            var listElement = $(elem.currentTarget).parent().parent();
+            expand(listElement);
+            localStorage.setItem('list_state_' + listElement.attr("id"), "false");
         });
+
+        //Resize handler
+        $(".list").resize(function (e) {
+            $(e.currentTarget).width("auto");
+            if(!$(e.currentTarget).hasClass("x-collapsed"))
+            localStorage.setItem('list_size_' + $(e.currentTarget).attr("id"), $(e.currentTarget).width());
+        });
+    }
+
+    function collapse(element) {
+        $(element).addClass("x-collapsed");
+
+    }
+
+    function expand(element) {
+        $(element).removeClass("x-collapsed");
+    }
+
+    function setSize(element,width) {
+        $(element).width(width);
     }
 
     function addCSSStyleSheet(generatedCSS) {
@@ -69,7 +93,7 @@ function initFlexyTrello() {
         return result;
     }
 
-    function restoreState() {
+    function getPreviousState() {
         chrome.extension.sendMessage({
             command: 'getBoardId',
             id: findFirstCardId()
@@ -79,8 +103,30 @@ function initFlexyTrello() {
                     command: 'getBoardDetail',
                     id: data.idBoard
                 }, function (data) {
-                    console.log(data.lists);
+                    $('.list').each(function (index, element) {
+                        if (data.lists[index]) {
+                            $(element).attr("id", data.lists[index].id);
+                        }
+                    });
+                    restoreState();
                 });
+            }
+        });
+    }
+
+    function restoreState() {
+        $('.list').each(function (index, element) {
+            var id = $(element).attr("id");
+            console.log(id);
+            if (id) {
+                var state = localStorage.getItem('list_state_' + id);
+                if (state && state.collapsed === "true") {
+                    collapse(element);
+                }
+                var size = localStorage.getItem('list_size_' + id);
+                if (size) {
+                    setSize(element,size);
+                }
             }
         });
     }
