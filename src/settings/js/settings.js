@@ -1,5 +1,9 @@
 function init() {
 
+    // Message and button containers
+    var lout = $("#trello_helper_loggedout");
+    var lin = $("#trello_helper_loggedin");
+
     // Check if page load is a redirect back from the auth procedure
     if (HashSearch.keyExists('token')) {
         Trello.authorize(
@@ -23,10 +27,6 @@ function init() {
                 }
             });
     }
-
-    // Message and button containers
-    var lout = $("#trello_helper_loggedout");
-    var lin = $("#trello_helper_loggedin");
 
     // Log in button
     $("#trello_helper_login").click(function () {
@@ -53,7 +53,7 @@ function init() {
         location.reload();
     });
 
-    if (!localStorage.trello_token) {
+    if (localStorage.getItem('trello_token')=== null  ) {
         $(lout).show();
         $(lin).hide();
     } else {
