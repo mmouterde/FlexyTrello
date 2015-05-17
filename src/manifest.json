@@ -1,36 +1,41 @@
 {
-    "name": "FlexyTrello",
-    "description": "Make Trello Lists Resizable",
-    "version": "1.1.5",
-    "icons": {
-        "16": "resize16.png",
-        "48": "resize48.png",
-        "128": "resize128.png"
-    },
-    "author": "Martin Mouterde",
-    "background": {
-        "scripts": ["./background.js"],
-        "persistent": false
-    },
-    "content_scripts": [
-        {
-            "js": [
-                "jquery-1.7.1.min.js",
-                "FlexyTrello.js"
-            ],
-            "matches": ["https://trello.com/*"]
-        }
+  "name": "FlexyTrello",
+  "description": "Make Trello Lists Resizable",
+  "version": "1.1.6",
+  "icons": {
+    "16": "resize16.png",
+    "48": "resize48.png",
+    "128": "resize128.png"
+  },
+  "author": "Martin Mouterde",
+  "background": {
+    "scripts": [
+      "./background.js"
     ],
-    "web_accessible_resources": [
-        "*.css"
-    ],
-    "permissions": [
-        "tabs",
+    "persistent": false
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "jquery-1.7.1.min.js",
+        "jquery.waituntilexists.js",
+        "FlexyTrello.js"
+      ],
+      "matches": [
         "https://trello.com/*"
-    ],
-    "page_action": {
-        "default_icon": "resize.png",
-        "default_title": "FlexyTrello"
-    },
-    "manifest_version": 2
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "*.css"
+  ],
+  "permissions": [
+    "tabs",
+    "https://trello.com/*"
+  ],
+  "page_action": {
+    "default_icon": "resize.png",
+    "default_title": "FlexyTrello"
+  },
+  "manifest_version": 2
 }

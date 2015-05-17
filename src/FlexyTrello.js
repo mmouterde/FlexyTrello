@@ -1,4 +1,5 @@
-$(function () {
+$(".list-card:first").waitUntilExists(initFlexyTrello, true);
+function initFlexyTrello() {
 
     var headers = $(".list-header");
     var headerPaddingTop = cssPxToInt(headers.css("padding-top"));
@@ -20,6 +21,7 @@ $(function () {
     };
 
     $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/override.css", callback);
+//DEV    $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/override.css", callback);
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
         addUI();
@@ -62,4 +64,4 @@ $(function () {
         }
         return result;
     }
-});
+};
