@@ -20,9 +20,9 @@ function initFlexyTrello() {
         headerWidth: headers.css("width")
     };
 
-    //PROD $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
-    //DEV 
-    $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
+    //PROD
+    $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
+    //DEV     $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
 
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
