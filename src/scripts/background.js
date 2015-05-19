@@ -5,6 +5,10 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
         chrome.pageAction.hide(tab.id);
 });
 
+chrome.pageAction.onClicked.addListener(function callback(tab) {
+    chrome.tabs.sendMessage(tab.id, {command: "reset"});
+});
+
 chrome.extension.onMessage.addListener(function (request, sender, sendResponse) {
 
     if (request.command == 'saveToken') {
@@ -14,15 +18,16 @@ chrome.extension.onMessage.addListener(function (request, sender, sendResponse) 
     }
 
     if (request.command == 'getBoardDetail') {
-        return callTrello('boards/' + request.id, {lists:'open',list_fields:'name'},sendResponse);
+        return callTrello('boards/' + request.id, {lists: 'open', list_fields: 'name'}, sendResponse);
     }
 
     if (request.command == 'getBoardId') {
-        return callTrello('cards/' + request.id + '/list', {fields:'idBoard'},sendResponse);
+        return callTrello('cards/' + request.id + '/list', {fields: 'idBoard'}, sendResponse);
     }
+
 });
 
-function callTrello(url, fields,sendResponse) {
+function callTrello(url, fields, sendResponse) {
     trelloInit();
     Trello.rest('GET', url, fields, function (data) {
         sendResponse(data);

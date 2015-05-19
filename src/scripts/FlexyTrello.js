@@ -22,7 +22,7 @@ function initFlexyTrello() {
 
     //PROD
     $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
-    //DEV     $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
+    //DEV  $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
 
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
@@ -138,4 +138,25 @@ function initFlexyTrello() {
     function findFirstCardId() {
         return $('a.list-card-title:first').attr('href').split('/')[2];
     }
+}
+
+chrome.runtime.onMessage.addListener(function (message) {
+    if (message.command == 'reset') {
+        reset();
+    }
+});
+
+function reset() {
+    var keysToRemove = [];
+    for (var i = 0, len = localStorage.length; i < len; ++i) {
+        var key = localStorage.key(i);
+        if (key.indexOf("list_") === 0) {
+            keysToRemove.push(key);
+        }
+    }
+
+    keysToRemove.forEach(function (key) {
+        localStorage.removeItem(key);
+    });
+    window.location.reload();
 }
