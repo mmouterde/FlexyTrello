@@ -29,7 +29,7 @@ function initFlexyTrello() {
         addUI();
         getPreviousState();
     }
-    
+
     function addUI() {
         //Add a collapse button
         headers.prepend("<a href='#' class='x-btn-collapse icon-sm'>-</a>");
@@ -50,12 +50,18 @@ function initFlexyTrello() {
             localStorage.setItem('list_state_' + listElement.attr("id"), "false");
         });
 
+        var lastDate = new Date();
         //Resize handler
         $(".list").resize(function (e) {
-                $(e.currentTarget).css("flex-basis", "");
-                if (!$(e.currentTarget).hasClass("x-collapsed"))
-                    localStorage.setItem('list_size_' + $(e.currentTarget).attr("id"), $(e.currentTarget).width());
+            var now = new Date();
+            if (now.getTime() > lastDate.getTime() + 1000) {
+                $(e.currentTarget).removeAttr("style");
+            }
+            lastDate = now;
+            if (!$(e.currentTarget).hasClass("x-collapsed"))
+                localStorage.setItem('list_size_' + $(e.currentTarget).attr("id"), $(e.currentTarget).width());
         });
+
     }
 
     function collapse(element) {
@@ -68,7 +74,7 @@ function initFlexyTrello() {
     }
 
     function setSize(element, width) {
-        $(element).css("flex-basis", width + "px");
+        $(element).css("width", width + "px");
     }
 
     function addCSSStyleSheet(generatedCSS) {
@@ -118,7 +124,7 @@ function initFlexyTrello() {
             var id = $(element).attr("id");
             if (id) {
                 var state = localStorage.getItem('list_state_' + id);
-                if (state && state.collapsed === "true") {
+                if (state && state === "true") {
                     collapse(element);
                 }
                 var size = localStorage.getItem('list_size_' + id);
