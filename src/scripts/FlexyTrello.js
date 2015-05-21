@@ -22,11 +22,11 @@ function initFlexyTrello() {
 
     //PROD
     $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
-    //DEV  $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
+    //DEV
+    //$.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
 
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
-        addUI();
         getPreviousState();
     }
 
@@ -51,15 +51,20 @@ function initFlexyTrello() {
         });
 
         var lastDate = new Date();
+        var mouseShouldBeDown = false;
         //Resize handler
         $(".list").resize(function (e) {
             var now = new Date();
-            if (now.getTime() > lastDate.getTime() + 1000) {
+            if (!mouseShouldBeDown && now.getTime() > lastDate.getTime() + 1000) {
                 $(e.currentTarget).removeAttr("style");
+                mouseShouldBeDown = true;
             }
             lastDate = now;
             if (!$(e.currentTarget).hasClass("x-collapsed"))
                 localStorage.setItem('list_size_' + $(e.currentTarget).attr("id"), $(e.currentTarget).width());
+        });
+        $(document).on("mouseup", function () {
+            mouseShouldBeDown = false;
         });
 
     }
@@ -116,6 +121,7 @@ function initFlexyTrello() {
                     restoreState();
                 });
             }
+            addUI();
         });
     }
 
