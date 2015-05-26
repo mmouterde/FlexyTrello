@@ -50,7 +50,7 @@ function initFlexyTrello() {
         });
 
         //Add a increase width button
-        $(".list").append("<a href='#' class='x-btn-step-increment'>&#8702;</a>");
+        $(".list").append("<a href='#' class='x-btn-step-increment'>&#8594;</a>");
         $(".x-btn-step-increment").on("click", function (elem) {
             var listElement = $(elem.currentTarget).parent();
             var step = localStorage.getItem('list_step_' + listElement.attr("id")) || 1;
@@ -59,7 +59,7 @@ function initFlexyTrello() {
             localStorage.setItem('list_step_' + listElement.attr("id"), step);
         });
         //Add a decrease width button
-        $(".list").append("<a href='#' class='x-btn-step-decrement'>&#8701;</a>");
+        $(".list").append("<a href='#' class='x-btn-step-decrement'>&#8592;</a>");
         $(".x-btn-step-decrement").on("click", function (elem) {
             var listElement = $(elem.currentTarget).parent();
             var step = localStorage.getItem('list_step_' + listElement.attr("id")) || 1;
