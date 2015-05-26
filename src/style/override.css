@@ -39,7 +39,6 @@
 
 
 .list {
-    resize: horizontal;
     overflow-x: hidden;
     flex: 0 0 auto;
 }
@@ -56,9 +55,29 @@
 }
 
 .open-card-composer {
-    margin-right: 20px;
+    margin-right: 40px;
 }
 
 .list.x-collapsed *:not(.list-header-name):not(.list-header):not(.x-btn-expand){
+    display: none;
+}
+
+
+.x-btn-step-increment, .x-btn-step-decrement {
+    position: absolute;
+    bottom: 10px;
+    text-decoration: none;
+    opacity: 0.3;
+}
+.x-btn-step-increment:hover, .x-btn-step-decrement:hover {
+    opacity: 1;
+}
+
+.x-btn-step-increment {
+    right: 10px;
+}
+
+.x-btn-step-decrement {
+    right: 25px;
     display: none;
 }

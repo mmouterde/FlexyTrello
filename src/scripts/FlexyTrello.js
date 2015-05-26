@@ -22,8 +22,7 @@ function initFlexyTrello() {
 
     //PROD
     $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
-    //DEV
-    //$.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
+    //DEV $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
 
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
@@ -50,36 +49,46 @@ function initFlexyTrello() {
             localStorage.setItem('list_state_' + listElement.attr("id"), "false");
         });
 
-        var lastDate = new Date();
-        var mouseShouldBeDown = false;
-        //Resize handler
-        $(".list").resize(function (e) {
-            var now = new Date();
-            if (!mouseShouldBeDown && now.getTime() > lastDate.getTime() + 1000) {
-                $(e.currentTarget).removeAttr("style");
-                mouseShouldBeDown = true;
-            }
-            lastDate = now;
-            if (!$(e.currentTarget).hasClass("x-collapsed"))
-                localStorage.setItem('list_size_' + $(e.currentTarget).attr("id"), $(e.currentTarget).width());
+        //Add a increase width button
+        $(".list").append("<a href='#' class='x-btn-step-increment'>&#8702;</a>");
+        $(".x-btn-step-increment").on("click", function (elem) {
+            var listElement = $(elem.currentTarget).parent();
+            var step = localStorage.getItem('list_step_' + listElement.attr("id")) || 1;
+            step++;
+            setSizeFromStep(listElement, step);
+            localStorage.setItem('list_step_' + listElement.attr("id"), step);
         });
-        $(document).on("mouseup", function () {
-            mouseShouldBeDown = false;
+        //Add a decrease width button
+        $(".list").append("<a href='#' class='x-btn-step-decrement'>&#8701;</a>");
+        $(".x-btn-step-decrement").on("click", function (elem) {
+            var listElement = $(elem.currentTarget).parent();
+            var step = localStorage.getItem('list_step_' + listElement.attr("id")) || 1;
+            if (step) {
+                step--;
+                setSizeFromStep(listElement, step);
+                localStorage.setItem('list_step_' + listElement.attr("id"), step);
+            }
         });
 
     }
 
     function collapse(element) {
         $(element).addClass("x-collapsed");
-
     }
 
     function expand(element) {
         $(element).removeClass("x-collapsed");
     }
 
-    function setSize(element, width) {
-        $(element).css("width", width + "px");
+
+    function setSizeFromStep(element, step) {
+        var newWidth = cssPxToInt(CSSContext.listWidth) * step - 10 * (step - 1) + 15;
+        $(element).css("width", newWidth + "px");
+        if (step > 1) {
+            $(element).children(".x-btn-step-decrement").show();
+        } else {
+            $(element).children(".x-btn-step-decrement").hide();
+        }
     }
 
     function addCSSStyleSheet(generatedCSS) {
@@ -133,9 +142,9 @@ function initFlexyTrello() {
                 if (state && state === "true") {
                     collapse(element);
                 }
-                var size = localStorage.getItem('list_size_' + id);
-                if (size) {
-                    setSize(element, size);
+                var step = localStorage.getItem('list_step_' + id);
+                if (step) {
+                    setSizeFromStep(element, parseInt(step));
                 }
             }
         });
