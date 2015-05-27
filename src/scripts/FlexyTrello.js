@@ -50,7 +50,7 @@ function initFlexyTrello() {
         });
 
         //Add a increase width button
-        $(".list").append("<a href='#' class='x-btn-step-increment'>&#8594;</a>");
+        list.append("<a href='#' class='x-btn-step-increment'>&#8594;</a>");
         $(".x-btn-step-increment").on("click", function (elem) {
             var listElement = $(elem.currentTarget).parent();
             var step = localStorage.getItem('list_step_' + listElement.attr("id")) || 1;
@@ -59,7 +59,7 @@ function initFlexyTrello() {
             localStorage.setItem('list_step_' + listElement.attr("id"), step);
         });
         //Add a decrease width button
-        $(".list").append("<a href='#' class='x-btn-step-decrement'>&#8592;</a>");
+        list.append("<a href='#' class='x-btn-step-decrement'>&#8592;</a>");
         $(".x-btn-step-decrement").on("click", function (elem) {
             var listElement = $(elem.currentTarget).parent();
             var step = localStorage.getItem('list_step_' + listElement.attr("id")) || 1;
@@ -82,7 +82,8 @@ function initFlexyTrello() {
 
 
     function setSizeFromStep(element, step) {
-        var newWidth = cssPxToInt(CSSContext.listWidth) * step - 10 * (step - 1) + 15;
+        var listWapperWidth = cssPxToInt(CSSContext.listWidth) - cssPxToInt(CSSContext.listCardWidth);
+        var newWidth = (cssPxToInt(CSSContext.listCardWidth) + 6 ) * step + listWapperWidth;
         $(element).css("width", newWidth + "px");
         if (step > 1) {
             $(element).children(".x-btn-step-decrement").show();
@@ -135,7 +136,7 @@ function initFlexyTrello() {
     }
 
     function restoreState() {
-        $('.list').each(function (index, element) {
+        list.each(function (index, element) {
             var id = $(element).attr("id");
             if (id) {
                 var state = localStorage.getItem('list_state_' + id);
