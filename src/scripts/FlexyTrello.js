@@ -1,4 +1,11 @@
-$(".list-card:first").waitUntilExists(initFlexyTrello, true);
+var once = false;
+$(".list-card:first").waitUntilExists(function () {
+        if (!once)
+            initFlexyTrello();
+        once = true;
+    }
+    , true);
+
 function initFlexyTrello() {
 
     var headers = $(".list-header");
@@ -82,8 +89,9 @@ function initFlexyTrello() {
 
 
     function setSizeFromStep(element, step) {
+        var scrollbarWidth = 9;
         var listWapperWidth = cssPxToInt(CSSContext.listWidth) - cssPxToInt(CSSContext.listCardWidth);
-        var newWidth = (cssPxToInt(CSSContext.listCardWidth) + 6 ) * step + listWapperWidth;
+        var newWidth = (cssPxToInt(CSSContext.listCardWidth) + 6 ) * step + listWapperWidth + scrollbarWidth;
         $(element).css("width", newWidth + "px");
         if (step > 1) {
             $(element).children(".x-btn-step-decrement").show();
