@@ -41,6 +41,7 @@
 .list {
     overflow-x: hidden;
     flex: 0 0 auto;
+    max-width: initial;
 }
 
 
