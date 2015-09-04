@@ -11,23 +11,27 @@
     float:right;
 }
 
-.list.x-collapsed .x-btn-collapse {
+.x-collapsed .x-btn-collapse {
     display: none;
 }
 
-.list.x-collapsed .list-header{
+.x-collapsed .list-header{
     transform-origin: 0 0;
     transform: translateY({{headerTranslate}}px) rotate(-90deg);
     width:{{headerWidth}};
 }
 
-.list.x-collapsed {
+.x-collapsed {
     max-width:{{listReducedWidth}}px;
     height:{{listWidth}};
 }
 
+.x-collapsed .list {
+    max-width:{{listReducedWidth}}px;
+    height:{{listWidth}};
+}
 
-.list.x-collapsed{
+.x-collapsed{
     resize: none;
     overflow:visible;
 }
@@ -59,7 +63,7 @@
     margin-right: 40px;
 }
 
-.list.x-collapsed *:not(.list-header-name):not(.list-header):not(.x-btn-expand){
+.x-collapsed *:not(.list-header-name):not(.list):not(.list-header):not(.x-btn-expand){
     display: none;
 }
 

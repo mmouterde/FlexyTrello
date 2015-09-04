@@ -80,11 +80,11 @@ function initFlexyTrello() {
     }
 
     function collapse(element) {
-        $(element).addClass("x-collapsed");
+        $(element).parent().addClass("x-collapsed");
     }
 
     function expand(element) {
-        $(element).removeClass("x-collapsed");
+        $(element).parent().removeClass("x-collapsed");
     }
 
 
