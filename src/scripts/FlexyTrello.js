@@ -92,7 +92,7 @@ function initFlexyTrello() {
         var scrollbarWidth = 9;
         var listWapperWidth = cssPxToInt(CSSContext.listWidth) - cssPxToInt(CSSContext.listCardWidth);
         var newWidth = (cssPxToInt(CSSContext.listCardWidth) + 6 ) * step + listWapperWidth + scrollbarWidth;
-        $(element).css("width", newWidth + "px");
+        $(element).parent().css("width", newWidth + "px");
         if (step > 1) {
             $(element).children(".x-btn-step-decrement").show();
         } else {
