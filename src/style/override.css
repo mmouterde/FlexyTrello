@@ -7,10 +7,6 @@
     display: block;
 }
 
-.x-btn-collapse, .x-btn-expand {
-    float:right;
-}
-
 .x-collapsed .x-btn-collapse {
     display: none;
 }
@@ -63,8 +59,11 @@
     margin-right: 40px;
 }
 
-.x-collapsed *:not(.list-header-name):not(.list):not(.list-header):not(.x-btn-expand){
+.x-collapsed *:not(.list-header-name):not(.list):not(.list-header):not(.x-btn-expand):not(.list-header-extras){
     display: none;
+}
+.x-collapsed .list-header-extras {
+    right: 16px;
 }
 
 
