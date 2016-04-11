@@ -59,6 +59,9 @@ function initFlexyTrello() {
             localStorage.setItem('list_state_' + listElement.attr("id"), "false");
         });
 
+        //Add a fake content if 'add new card' is not shown the button are hidden
+        list.append("<span class='placeholder'>&nbsp;</span>");
+
         //Add a increase width button
         list.append("<a href='#' class='x-btn-step-increment'>&#8594;</a>");
         $(".x-btn-step-increment").on("click", function (elem) {

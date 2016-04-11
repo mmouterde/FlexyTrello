@@ -85,3 +85,12 @@
     right: 25px;
     display: none;
 }
+
+.placeholder {
+    padding:8px;
+}
+
+.list > a.open-card-composer.js-open-card-composer:visible + .placeholder {
+    display: none;
+}
+
