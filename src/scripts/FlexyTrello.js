@@ -66,23 +66,36 @@ function initFlexyTrello() {
         list.append("<a href='#' class='x-btn-step-increment'>&#8594;</a>");
         $(".x-btn-step-increment").on("click", function (elem) {
             var listElement = $(elem.currentTarget).parent();
-            var step = localStorage.getItem('list_step_' + listElement.attr("id")) || 1;
+            var listId = listElement.attr("id");
+
+            var step = listElement[0].step || 1;
+            if (listId) {
+                step = localStorage.getItem('list_step_' + listId) || 1;
+            }
+
             step++;
+            listElement[0].step = step;
             setSizeFromStep(listElement, step);
-            localStorage.setItem('list_step_' + listElement.attr("id"), step);
+            if (listId) {
+                localStorage.setItem('list_step_' + listId, step);
+            }
         });
         //Add a decrease width button
         list.append("<a href='#' class='x-btn-step-decrement'>&#8592;</a>");
         $(".x-btn-step-decrement").on("click", function (elem) {
             var listElement = $(elem.currentTarget).parent();
-            var step = localStorage.getItem('list_step_' + listElement.attr("id")) || 1;
-            if (step) {
-                step--;
-                setSizeFromStep(listElement, step);
-                localStorage.setItem('list_step_' + listElement.attr("id"), step);
+            var listId = listElement.attr("id");
+
+            var step = listElement[0].step || 1;
+            if (listId) {
+                step = localStorage.getItem('list_step_' + listId) || 1;
+            }
+            step--;
+            setSizeFromStep(listElement, step);
+            if (listId) {
+                localStorage.setItem('list_step_' + listId, step);
             }
         });
-
     }
 
     function collapse(element) {
