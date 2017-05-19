@@ -27,9 +27,9 @@ function initFlexyTrello() {
         headerWidth: headers.css("width")
     };
 
-    //PROD
-    $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
-    //DEV   $.get("chrome-extension://fgmomkegbkoichkfnkfgabomiifakahk/style/override.css", callback);
+    //PROD $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
+    //DEV
+    $.get("chrome-extension://fgmomkegbkoichkfnkfgabomiifakahk/style/override.css", callback);
 
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
@@ -44,6 +44,8 @@ function initFlexyTrello() {
         extraHeaders.prepend("<a class='dark-hover x-btn x-btn-collapse icon-sm' href='#'>-</a>");
         //Add an expand button
         extraHeaders.prepend("<a class='dark-hover x-btn x-btn-expand icon-sm' href='#'>+</a>");
+
+        extraHeaders.prepend("<span class='x-btn x-count icon-sm'>24<span>");
 
         //Collapse Button click handler
         $(".x-btn-collapse").on("click", function (elem) {
@@ -96,7 +98,16 @@ function initFlexyTrello() {
                 localStorage.setItem('list_step_' + listId, step);
             }
         });
+
+        setInterval(updateCounters, 3000);
     }
+
+    function updateCounters() {
+        $(".list-wrapper").each(function (index, elm) {
+            $(elm).find(".x-count").text("(" + $(elm).find(".list-card").length + ")");
+        })
+    }
+
 
     function collapse(element) {
         $(element).parent().addClass("x-collapsed");
@@ -145,7 +156,7 @@ function initFlexyTrello() {
             command: 'getBoardId',
             id: findFirstCardId()
         }, function (data) {
-            if (data.idBoard !== undefined) {
+            if (data && data.idBoard !== undefined) {
                 chrome.extension.sendMessage({
                     command: 'getBoardDetail',
                     id: data.idBoard

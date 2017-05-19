@@ -24,6 +24,10 @@
     width:{{headerWidth}};
 }
 
+.x-collapsed .list-header .x-count{
+    transform: rotate(90deg);
+}
+
 .x-collapsed {
     max-width:{{listReducedWidth}}px;
     height:{{listWidth}};
@@ -39,6 +43,9 @@
     overflow:visible;
 }
 
+.list-wrapper:not(.x-collapsed) .x-count{
+    display:none;
+}
 
 .add-list {
     flex-shrink: 1;
@@ -66,7 +73,7 @@
     margin-right: 40px;
 }
 
-.x-collapsed *:not(.list-header-name):not(.list):not(.list-header):not(.x-btn-expand):not(.list-header-extras){
+.x-collapsed *:not(.list-header-name):not(.list):not(.list-header):not(.x-btn-expand):not(.list-header-extras):not(.x-count){
     display: none;
 }
 .x-collapsed .list-header-extras {
