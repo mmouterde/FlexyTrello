@@ -1,4 +1,11 @@
-
+.x-btn {
+    float: left;
+    padding: 4px;
+}
+.x-btn:hover {
+    border-radius: 3px;
+    background: #CDD2D4;
+}
 .x-btn-expand {
     display :none;
 }

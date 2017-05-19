@@ -29,7 +29,7 @@ function initFlexyTrello() {
 
     //PROD
     $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
-    //DEV $.get("chrome-extension://odcejgfkabanfoikamfpcdpcpoepkmfj/style/override.css", callback);
+    //DEV   $.get("chrome-extension://fgmomkegbkoichkfnkfgabomiifakahk/style/override.css", callback);
 
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
@@ -41,9 +41,9 @@ function initFlexyTrello() {
         var extraHeaders = $(".list-header-extras");
 
         //Add a collapse button
-        extraHeaders.prepend("<a class='list-header-extras-menu dark-hover js-open-list-menu x-btn-collapse icon-sm' href='#'>-</a>");
+        extraHeaders.prepend("<a class='dark-hover x-btn x-btn-collapse icon-sm' href='#'>-</a>");
         //Add an expand button
-        extraHeaders.prepend("<a class='list-header-extras-menu dark-hover js-open-list-menu x-btn-expand icon-sm' href='#'>+</a>");
+        extraHeaders.prepend("<a class='dark-hover x-btn x-btn-expand icon-sm' href='#'>+</a>");
 
         //Collapse Button click handler
         $(".x-btn-collapse").on("click", function (elem) {
