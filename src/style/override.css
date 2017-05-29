@@ -24,8 +24,9 @@
     width:{{headerWidth}};
 }
 
-.x-collapsed .list-header .x-count{
+.x-collapsed .list-header .x-counter{
     transform: rotate(90deg);
+    margin-right: 10px;
 }
 
 .x-collapsed {
@@ -43,9 +44,6 @@
     overflow:visible;
 }
 
-.list-wrapper:not(.x-collapsed) .x-count{
-    display:none;
-}
 
 .add-list {
     flex-shrink: 1;
@@ -73,7 +71,7 @@
     margin-right: 40px;
 }
 
-.x-collapsed *:not(.list-header-name):not(.list):not(.list-header):not(.x-btn-expand):not(.list-header-extras):not(.x-count){
+.x-collapsed *:not(.list-header-name):not(.list):not(.list-header):not(.x-btn-expand):not(.list-header-extras):not(.x-counter){
     display: none;
 }
 .x-collapsed .list-header-extras {
