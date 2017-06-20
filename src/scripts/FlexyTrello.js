@@ -1,13 +1,4 @@
-var once = false;
-$(".list-card:first").waitUntilExists(function () {
-        if (!once)
-            initFlexyTrello();
-        once = true;
-    }
-    , true);
-
 function initFlexyTrello() {
-
     var headers = $(".list-header");
     var headerPaddingTop = cssPxToInt(headers.css("padding-top"));
     var headerPaddingBottom = cssPxToInt(headers.css("padding-bottom"));
@@ -186,10 +177,15 @@ function initFlexyTrello() {
 }
 
 chrome.runtime.onMessage.addListener(function (message) {
-    if (message.command == 'reset') {
+    if (message.command === 'reset') {
         reset();
     }
+    if (message.command === 'init') {
+        initOnce()
+    }
+    return true;
 });
+
 
 function reset() {
     var keysToRemove = [];
@@ -205,3 +201,11 @@ function reset() {
     });
     window.location.reload();
 }
+
+
+function initOnce() {
+    $(".list-card:first").waitUntilExists(function () {
+        initFlexyTrello();
+    }, true);
+}
+initOnce();

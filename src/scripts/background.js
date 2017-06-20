@@ -1,6 +1,10 @@
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    if (tab.url.indexOf("trello.com/b/") > 0)
+    if (tab.url.indexOf("trello.com/b/") > 0) {
         chrome.pageAction.show(tab.id);
+        if (changeInfo.title) {
+            chrome.tabs.sendMessage(tab.id, {command: "init"});
+        }
+    }
     else
         chrome.pageAction.hide(tab.id);
 });
