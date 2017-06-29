@@ -18,10 +18,7 @@ function initFlexyTrello() {
         headerWidth: headers.css("width")
     };
 
-    //PROD
-    $.get("chrome-extension://pggiemacedhgohmpcgdpceckeicjlgfn/style/override.css", callback);
-
-    //DEV $.get("chrome-extension://fgmomkegbkoichkfnkfgabomiifakahk/style/override.css", callback);
+    $.get("chrome-extension://"+chrome.runtime.id+"/style/override.css", callback);
 
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
@@ -172,7 +169,7 @@ function initFlexyTrello() {
     }
 
     function findFirstCardId() {
-        return $('a.list-card-title:first').attr('href').split('/')[2];
+        return $('a.list-card:first').attr('href').split('/')[2];
     }
 }
 
