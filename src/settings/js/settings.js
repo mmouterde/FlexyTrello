@@ -39,7 +39,7 @@ function init() {
                 interactive: true,
                 scope: {read: true, write: false},
                 success: function () {
-                    // Can't do nothing, we've left the page
+        		location.reload();
                 },
                 error: function () {
                     alert("Failed to authorize with Trello.")

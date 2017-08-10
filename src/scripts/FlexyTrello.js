@@ -18,7 +18,7 @@ function initFlexyTrello() {
         headerWidth: headers.css("width")
     };
 
-    $.get("chrome-extension://"+chrome.runtime.id+"/style/override.css", callback);
+    $.get("chrome-extension://" + chrome.runtime.id + "/style/override.css", callback);
 
     function callback(data) {
         addCSSStyleSheet(strReplace(data));
@@ -201,8 +201,11 @@ function reset() {
 
 
 function initOnce() {
-    $(".list-card:first").waitUntilExists(function () {
-        initFlexyTrello();
-    }, true);
+    if ($(".x-btn-step-decrement").length === 0) {
+        $(".list-card:first").waitUntilExists(function () {
+            initFlexyTrello();
+        }, true);
+    }
 }
+
 initOnce();
