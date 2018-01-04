@@ -3,7 +3,7 @@ function initFlexyTrello() {
     var headerPaddingTop = cssPxToInt(headers.css("padding-top"));
     var headerPaddingBottom = cssPxToInt(headers.css("padding-bottom"));
     var headerPaddingLeft = cssPxToInt(headers.css("padding-left"));
-    var headerHeight = cssPxToInt(headers.css("height"));
+    var headerHeight = 35;
 
     var list = $(".list");
     var listPaddingTop = cssPxToInt(list.css("padding-top"));
