@@ -192,7 +192,7 @@ function reset() {
 function initOnce() {
     if ($(".x-btn-step-decrement").length === 0) {
         $(".list-card:first").waitUntilExists(function () {
-            initFlexyTrello();
+           setTimeout(initFlexyTrello,3000);
         }, true);
     }
 }
