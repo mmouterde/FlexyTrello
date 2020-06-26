@@ -1,7 +1,7 @@
 {
   "name": "FlexyTrello",
   "description": "Make Trello Lists Resizable",
-  "version": "1.3.17",
+  "version": "1.3.18",
   "icons": {
     "16": "img/resize16.png",
     "48": "img/resize48.png",
@@ -18,25 +18,12 @@
         "lib/jquery.waituntilexists.js",
         "scripts/FlexyTrello.js"
       ],
-      "matches": [
-        "https://trello.com/b*"
-      ]
+      "matches": ["https://trello.com/b*"]
     }
   ],
-  "web_accessible_resources": [
-    "style/*",
-    "settings/*",
-    "lib/*",
-    "img/*"
-  ],
+  "web_accessible_resources": ["style/*", "settings/*", "lib/*", "img/*"],
   "options_page": "settings/index.html",
-  "options_ui": {
-    "page": "settings/index.html"
-  },
-  "permissions": [
-    "tabs",
-    "https://trello.com/*"
-  ],
+  "permissions": ["tabs", "https://trello.com/*"],
   "page_action": {
     "default_icon": "img/resize.png",
     "default_title": "FlexyTrello"
